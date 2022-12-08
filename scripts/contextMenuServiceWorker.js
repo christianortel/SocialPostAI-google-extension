@@ -54,7 +54,7 @@ const generateCompletionAction = async (info) => {
     const { selectionText } = info;
     const basePromptPrefix = 
       `
-      Help me write a twitter post based on the title below. Write this in the style of author Kent Beck. Please make it seem like the writer is very knowledgeable on the topic and did their research. 
+      Help me write a tweet based on the title below. Write this in the style of author Kent Beck. Please make it seem like the writer is very knowledgeable on the topic and did their research. 
 
       Title:
       `;
