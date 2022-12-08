@@ -1,5 +1,5 @@
 {
-  "name": "TweetGen AI",
+  "name": "SocialPost AI",
   "description": "Generate a social media post about crypto using AI. You give us the topic or sentence, AI will handle the rest!",
   "version": "1.0",
   "manifest_version": 3,
@@ -11,7 +11,7 @@
   },
   "action": {
     "default_popup": "index.html",
-    "default_title": "Generate tweet"
+    "default_title": "Generate post"
   },
   "background": {
     "service_worker": "scripts/contextMenuServiceWorker.js"

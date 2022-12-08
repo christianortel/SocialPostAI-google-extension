@@ -4,6 +4,8 @@ const getKey = () => {
       if (result['openai-key']) {
         const decodedKey = atob(result['openai-key']);
         resolve(decodedKey);
+      } else {
+        reject('Key not found in storage.');
       }
     });
   })
@@ -52,25 +54,36 @@ const generateCompletionAction = async (info) => {
     const { selectionText } = info;
     const basePromptPrefix = 
       `
-      Help me write a blockchain themed twitter post based on the title below. Write this in the style of Sassal0x from the Daily Gwei. Please make it seem like the writer is very knowledgeable on the topic and did their research. 
+      Help me write a twitter post based on the title below. Write this in the style of author Kent Beck. Please make it seem like the writer is very knowledgeable on the topic and did their research. 
 
       Title:
       `;
 
         
-    const baseCompletion = await generate(
-      `${basePromptPrefix}${selectionText}`
-    );
-
-    console.log(baseCompletion.text)	
-} catch (error) {
-  console.log(error);
-}
-};
-chrome.contextMenus.create({
+      const baseCompletion = await generate(
+        `${basePromptPrefix}${selectionText}`
+      );
+  
+      generatedText = baseCompletion.text;
+      sendMessage(generatedText);
+      console.log(generatedText);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  // Inject the latest generated text into the active tab
+  const injectGeneratedText = () => {
+    sendMessage(generatedText);
+  };
+  
+  chrome.contextMenus.create({
     id: 'context-run',
     title: 'Generate tweet',
     contexts: ['selection'],
   });
   
   chrome.contextMenus.onClicked.addListener(generateCompletionAction);
+  
+  // Inject the latest generated text whenever the active tab is updated
+  chrome.tabs.onUpdated.addListener(injectGeneratedText);

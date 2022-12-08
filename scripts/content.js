@@ -1,14 +1,11 @@
-const insert = (content) => { 
-    // Find Twitter editor input section
-const elements = document.getElementsByClassName('public-DraftStyleDefault-block public-DraftStyleDefault-ltr');
-
-if (elements.length === 0) {
-    return;
-}
-    
-const element = document.getElementsByClassName("public-DraftStyleDefault-block public-DraftStyleDefault-ltr")[0].firstChild.firstChild
+const insert = (content) => {     
+    const element = document.getElementsByClassName(
+    "public-DraftStyleDefault-block public-DraftStyleDefault-ltr"
+)[0].firstChild.firstChild
 element.innerText = content
-console.log(content)        
+    
+console.log(content, "Hello")
+console.log(element)
 return true;
 };
 
